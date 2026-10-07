@@ -1,4 +1,5 @@
 import { Mail, Lock, LogIn, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   return (
@@ -62,10 +63,10 @@ export default function Login() {
 
         <div className="mt-8 text-center text-sm text-secondary-text">
           Don't have an account?{' '}
-          <a href="#" className="text-electric hover:text-cyan-accent transition-colors inline-flex items-center group">
+          <Link to="/register" className="text-electric hover:text-cyan-accent transition-colors inline-flex items-center group">
             Create one 
             <ArrowRight size={14} className="ml-1 transform group-hover:translate-x-1 transition-transform" />
-          </a>
+          </Link>
         </div>
       </div>
     </div>
