@@ -10,7 +10,7 @@ export default function Dashboard() {
         </p>
       </header>
 
-      <div className="glass-card p-8 rounded-2xl flex items-center justify-center min-h-[300px] border-dashed border-2 border-gray-700">
+      <div className="glass-card p-8 rounded-2xl flex items-center justify-center min-h-75 border-dashed border-2 border-gray-700">
         <p className="text-secondary-text text-lg">
           Dashboard stats will appear here (Next feature).
         </p>

@@ -29,7 +29,7 @@ export default function Sidebar() {
   return (
     <div className="h-screen w-64 glass-card border-r border-gray-800 flex flex-col fixed left-0 top-0">
       <div className="p-6 flex items-center space-x-3">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-electric to-cyan-accent flex items-center justify-center">
+        <div className="w-8 h-8 rounded-lg bg-linear-to-br from-electric to-cyan-accent flex items-center justify-center">
           <span className="text-white font-bold text-xl">A</span>
         </div>
         <span className="text-xl font-bold text-transparent bg-clip-text bg-linear-to-r from-main-text to-secondary-text">
