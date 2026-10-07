@@ -64,13 +64,13 @@ export default function Register() {
             </div>
           </div>
 
-          <button
-            type="button"
+          <Link
+            to="/dashboard"
             className="w-full bg-linear-to-r from-primary to-electric hover:from-electric hover:to-cyan-accent text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
           >
             <UserPlus size={18} />
             <span>Sign Up</span>
-          </button>
+          </Link>
         </form>
 
         <div className="mt-8 text-center text-sm text-secondary-text">
