@@ -417,7 +417,7 @@ export default function Flashcards() {
             <div className="perspective-1000 max-w-2xl mx-auto py-2">
               <div
                 onClick={handleFlip}
-                className={`relative w-full min-h-[360px] transform-style-3d transition-transform duration-500 cursor-pointer ${
+                className={`relative w-full min-h-90 transform-style-3d transition-transform duration-500 cursor-pointer ${
                   isFlipped ? 'rotate-y-180' : ''
                 }`}
               >
