@@ -69,7 +69,7 @@ const INITIAL_SESSIONS = [
 
 function FormattedMessage({ text, isAi }) {
   if (!isAi) {
-    return <p className="text-xs leading-relaxed text-zinc-100 font-normal">{text}</p>;
+    return <p className="text-xs leading-relaxed text-white font-normal">{text}</p>;
   }
 
   const blocks = text.split('\n\n');
@@ -87,9 +87,9 @@ function FormattedMessage({ text, isAi }) {
             const headerCells = lines[0].split('|').map((c) => c.trim()).filter(Boolean);
             const rowLines = lines.slice(1);
             return (
-              <div key={idx} className="overflow-x-auto my-3 rounded border border-zinc-800 bg-zinc-900/50">
+              <div key={idx} className="overflow-x-auto my-3 rounded border border-zinc-200 bg-white shadow-2xs">
                 <table className="w-full text-xs text-left">
-                  <thead className="bg-zinc-900 text-zinc-300 font-mono font-medium border-b border-zinc-800">
+                  <thead className="bg-zinc-100 text-zinc-800 font-mono font-medium border-b border-zinc-200">
                     <tr>
                       {headerCells.map((h, hIdx) => (
                         <th key={hIdx} className="px-3 py-2 text-[11px] uppercase tracking-wider">
@@ -98,18 +98,18 @@ function FormattedMessage({ text, isAi }) {
                       ))}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-800/80 font-mono text-[11px]">
+                  <tbody className="divide-y divide-zinc-200 font-mono text-[11px]">
                     {rowLines.map((row, rIdx) => {
                       const cells = row.split('|').map((c) => c.trim()).filter(Boolean);
                       return (
-                        <tr key={rIdx} className="hover:bg-zinc-900/80 transition-colors">
+                        <tr key={rIdx} className="hover:bg-zinc-50 transition-colors">
                           {cells.map((cell, cIdx) => (
-                            <td key={cIdx} className="px-3 py-2 text-zinc-300">
+                            <td key={cIdx} className="px-3 py-2 text-zinc-700">
                               <span
                                 dangerouslySetInnerHTML={{
                                   __html: cell
-                                    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-medium">$1</strong>')
-                                    .replace(/\$\$(.*?)\$\$/g, '<code class="text-zinc-100 bg-zinc-800 px-1 py-0.5 rounded">$1</code>'),
+                                    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-950 font-semibold">$1</strong>')
+                                    .replace(/\$\$(.*?)\$\$/g, '<code class="text-zinc-900 bg-zinc-100 px-1 py-0.5 rounded border border-zinc-200">$1</code>'),
                                 }}
                               />
                             </td>
@@ -128,7 +128,7 @@ function FormattedMessage({ text, isAi }) {
         if (block.trim().startsWith('$$') && block.trim().endsWith('$$')) {
           const formula = block.trim().replace(/^\$\$|\$\$$/g, '').replace(/\\mathbf\{([^}]+)\}/g, '$1');
           return (
-            <div key={idx} className="my-2 p-2.5 rounded bg-zinc-900 border border-zinc-800 text-center font-mono text-white text-xs font-medium">
+            <div key={idx} className="my-2 p-2.5 rounded bg-zinc-100 border border-zinc-200 text-center font-mono text-zinc-950 text-xs font-semibold">
               {formula}
             </div>
           );
@@ -137,7 +137,7 @@ function FormattedMessage({ text, isAi }) {
         // Header ###
         if (block.startsWith('### ')) {
           return (
-            <h4 key={idx} className="text-xs font-mono font-semibold uppercase tracking-wider text-white pt-1">
+            <h4 key={idx} className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-950 pt-1">
               {block.replace('### ', '')}
             </h4>
           );
@@ -148,7 +148,7 @@ function FormattedMessage({ text, isAi }) {
           return (
             <blockquote
               key={idx}
-              className="pl-3 border-l border-zinc-600 text-zinc-400 my-2 text-xs font-mono"
+              className="pl-3 border-l-2 border-zinc-400 text-zinc-600 my-2 text-xs font-mono bg-zinc-50/60 py-1"
             >
               {block.replace('> ', '').replace(/^"|"$/g, '')}
             </blockquote>
@@ -159,13 +159,13 @@ function FormattedMessage({ text, isAi }) {
         return (
           <p
             key={idx}
-            className="text-xs text-zinc-300 leading-relaxed font-normal"
+            className="text-xs text-zinc-800 leading-relaxed font-normal"
             dangerouslySetInnerHTML={{
               __html: block
-                .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-medium">$1</strong>')
-                .replace(/`([^`]+)`/g, '<code class="bg-zinc-900 text-zinc-100 px-1 py-0.5 rounded text-[11px] font-mono border border-zinc-800">$1</code>')
-                .replace(/\$\$(.*?)\$\$/g, '<code class="text-zinc-100 bg-zinc-900 px-1 py-0.5 rounded font-mono text-[11px]">$1</code>')
-                .replace(/\$([^$]+)\$/g, '<code class="text-zinc-100 bg-zinc-900 px-1 py-0.5 rounded font-mono text-[11px]">$1</code>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-950 font-semibold">$1</strong>')
+                .replace(/`([^`]+)`/g, '<code class="bg-zinc-100 text-zinc-900 px-1 py-0.5 rounded text-[11px] font-mono border border-zinc-200">$1</code>')
+                .replace(/\$\$(.*?)\$\$/g, '<code class="text-zinc-900 bg-zinc-100 px-1 py-0.5 rounded font-mono text-[11px] border border-zinc-200">$1</code>')
+                .replace(/\$([^$]+)\$/g, '<code class="text-zinc-900 bg-zinc-100 px-1 py-0.5 rounded font-mono text-[11px] border border-zinc-200">$1</code>')
                 .replace(/\n/g, '<br />'),
             }}
           />
@@ -376,19 +376,19 @@ export default function AiTutor() {
   return (
     <div className="h-[calc(100vh-4rem)] flex flex-col space-y-4 max-w-7xl mx-auto">
       {/* Top Header / Control Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-lg bg-zinc-950 border border-zinc-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-lg bg-white border border-zinc-200 shadow-2xs">
         <div className="flex items-center space-x-3">
-          <div className="w-7 h-7 rounded bg-zinc-900 border border-zinc-700 flex items-center justify-center text-white font-mono text-xs">
+          <div className="w-7 h-7 rounded bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-900 font-mono text-xs shadow-2xs">
             <Terminal size={14} />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <h1 className="text-sm font-semibold tracking-tight text-white">AI Tutor Engine</h1>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-900 text-zinc-300 border border-zinc-700">
+              <h1 className="text-sm font-semibold tracking-tight text-zinc-950">AI Tutor Engine</h1>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 text-zinc-700 border border-zinc-200">
                 v2.4
               </span>
             </div>
-            <p className="text-[11px] text-zinc-400 font-mono">
+            <p className="text-[11px] text-zinc-600 font-mono">
               Adaptive reasoning, mathematical derivation, and spaced recall
             </p>
           </div>
@@ -397,15 +397,15 @@ export default function AiTutor() {
         {/* Mode & Action Controls */}
         <div className="flex items-center flex-wrap gap-2">
           {/* Segmented Mode Selector */}
-          <div className="flex bg-zinc-900 p-0.5 rounded border border-zinc-800 text-xs font-mono">
+          <div className="flex bg-zinc-100 p-0.5 rounded border border-zinc-200 text-xs font-mono">
             {TUTOR_MODES.map((mode) => (
               <button
                 key={mode.id}
                 onClick={() => setSelectedMode(mode.id)}
                 className={`px-2.5 py-1 rounded transition-colors text-[11px] ${
                   selectedMode === mode.id
-                    ? 'bg-zinc-800 text-white font-medium border border-zinc-700 shadow-xs'
-                    : 'text-zinc-400 hover:text-zinc-200'
+                    ? 'bg-white text-zinc-950 font-medium border border-zinc-200 shadow-2xs'
+                    : 'text-zinc-600 hover:text-zinc-950'
                 }`}
                 title={mode.desc}
               >
@@ -417,7 +417,7 @@ export default function AiTutor() {
           <button
             onClick={startNewSession}
             id="new-chat-btn"
-            className="flex items-center space-x-1 px-2.5 py-1 bg-white hover:bg-zinc-200 text-black rounded text-xs font-medium transition-colors"
+            className="flex items-center space-x-1 px-2.5 py-1 bg-zinc-950 hover:bg-zinc-800 text-white rounded text-xs font-medium transition-colors shadow-xs"
           >
             <Plus size={13} />
             <span>New Session</span>
@@ -426,7 +426,7 @@ export default function AiTutor() {
           <button
             onClick={clearCurrentChat}
             id="clear-chat-btn"
-            className="p-1.5 text-zinc-400 hover:text-white rounded hover:bg-zinc-900 border border-transparent hover:border-zinc-800 transition-colors"
+            className="p-1.5 text-zinc-500 hover:text-zinc-950 rounded hover:bg-zinc-100 border border-transparent hover:border-zinc-200 transition-colors"
             title="Clear history"
           >
             <RotateCcw size={14} />
@@ -437,9 +437,9 @@ export default function AiTutor() {
       {/* Main Grid: Left Panel + Center Chat Area */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-4 gap-4 min-h-0">
         {/* Left Column: Subject Focus & History */}
-        <div className="hidden lg:flex lg:col-span-1 bg-zinc-950 p-3.5 rounded-lg flex-col border border-zinc-800 space-y-4 overflow-hidden">
+        <div className="hidden lg:flex lg:col-span-1 bg-white p-3.5 rounded-lg flex-col border border-zinc-200 shadow-2xs space-y-4 overflow-hidden">
           <div>
-            <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 mb-2">
+            <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-600 mb-2">
               Subject Scope
             </div>
             <div className="space-y-1">
@@ -451,23 +451,23 @@ export default function AiTutor() {
                     onClick={() => setSelectedSubject(sub.id)}
                     className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded text-xs font-mono transition-colors ${
                       isSelected
-                        ? 'bg-zinc-900 text-white border border-zinc-700 font-medium'
-                        : 'text-zinc-400 hover:bg-zinc-900/60 hover:text-zinc-200'
+                        ? 'bg-zinc-100 text-zinc-950 border border-zinc-200 font-semibold'
+                        : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-950'
                     }`}
                   >
                     <span className="flex items-center space-x-2">
-                      <Hash size={12} className={isSelected ? 'text-white' : 'text-zinc-400'} />
+                      <Hash size={12} className={isSelected ? 'text-zinc-950' : 'text-zinc-400'} />
                       <span>{sub.name}</span>
                     </span>
-                    {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-white"></span>}
+                    {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-zinc-950"></span>}
                   </button>
                 );
               })}
             </div>
           </div>
 
-          <div className="flex-1 flex flex-col min-h-0 pt-3 border-t border-zinc-800/80">
-            <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 mb-2 flex items-center">
+          <div className="flex-1 flex flex-col min-h-0 pt-3 border-t border-zinc-200">
+            <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-600 mb-2 flex items-center">
               <Clock size={11} className="mr-1.5" />
               Session History
             </div>
@@ -480,12 +480,12 @@ export default function AiTutor() {
                     onClick={() => setActiveSessionId(sess.id)}
                     className={`p-2 rounded cursor-pointer text-left transition-colors text-xs ${
                       isActive
-                        ? 'bg-zinc-900 border border-zinc-700 text-white'
-                        : 'text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-200'
+                        ? 'bg-zinc-100 border border-zinc-200 text-zinc-950 font-medium'
+                        : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-950'
                     }`}
                   >
-                    <p className="truncate text-xs font-medium text-zinc-200">{sess.title}</p>
-                    <p className="text-[10px] text-zinc-400 mt-0.5 flex items-center justify-between">
+                    <p className="truncate text-xs font-medium text-zinc-900">{sess.title}</p>
+                    <p className="text-[10px] text-zinc-500 mt-0.5 flex items-center justify-between">
                       <span className="capitalize">{sess.subject}</span>
                       <span>{sess.date}</span>
                     </p>
@@ -495,28 +495,28 @@ export default function AiTutor() {
             </div>
           </div>
 
-          <div className="p-2.5 rounded bg-zinc-900/60 border border-zinc-800 text-xs font-mono">
-            <div className="text-[10px] text-zinc-400 uppercase tracking-wider mb-1">
+          <div className="p-2.5 rounded bg-zinc-50 border border-zinc-200 text-xs font-mono">
+            <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1">
               Active Mode
             </div>
-            <p className="text-[11px] text-zinc-300">
+            <p className="text-[11px] text-zinc-700">
               {TUTOR_MODES.find((m) => m.id === selectedMode)?.desc}
             </p>
           </div>
         </div>
 
         {/* Center/Right: Chat Stream & Prompt Bar */}
-        <div className="lg:col-span-3 bg-zinc-950 rounded-lg flex flex-col border border-zinc-800 overflow-hidden relative">
+        <div className="lg:col-span-3 bg-white rounded-lg flex flex-col border border-zinc-200 shadow-2xs overflow-hidden relative">
           {/* Quick Prompts Bar */}
-          <div className="px-3.5 py-2 bg-zinc-900/60 border-b border-zinc-800 flex items-center gap-2 overflow-x-auto">
-            <span className="text-[10px] font-mono uppercase text-zinc-400 shrink-0">
+          <div className="px-3.5 py-2 bg-zinc-50/70 border-b border-zinc-200 flex items-center gap-2 overflow-x-auto">
+            <span className="text-[10px] font-mono uppercase text-zinc-500 shrink-0">
               Snippets:
             </span>
             {PROMPT_SUGGESTIONS.map((item, idx) => (
               <button
                 key={idx}
                 onClick={() => handleSend(item.prompt)}
-                className="shrink-0 text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 hover:border-zinc-700 transition-colors"
+                className="shrink-0 text-[11px] font-mono px-2 py-0.5 rounded bg-white hover:bg-zinc-100 text-zinc-700 hover:text-zinc-950 border border-zinc-200 transition-colors shadow-2xs"
               >
                 ${item.label}
               </button>
@@ -524,7 +524,7 @@ export default function AiTutor() {
           </div>
 
           {/* Messages Stream */}
-          <div className="flex-1 p-4 lg:p-6 overflow-y-auto space-y-5">
+          <div className="flex-1 p-4 lg:p-6 overflow-y-auto space-y-5 bg-zinc-50/30">
             {messages.map((msg) => {
               const isAi = msg.sender === 'ai';
               return (
@@ -533,33 +533,33 @@ export default function AiTutor() {
                   className={`flex items-start space-x-3 ${isAi ? 'justify-start' : 'justify-end'}`}
                 >
                   {isAi && (
-                    <div className="w-6 h-6 rounded bg-zinc-900 border border-zinc-700 flex items-center justify-center shrink-0 mt-0.5 text-zinc-200">
+                    <div className="w-6 h-6 rounded bg-zinc-100 border border-zinc-300 flex items-center justify-center shrink-0 mt-0.5 text-zinc-800 shadow-2xs">
                       <Bot size={13} />
                     </div>
                   )}
 
                   <div className={`max-w-[85%] lg:max-w-[78%] space-y-1.5 ${isAi ? '' : 'items-end'}`}>
-                    <div className="flex items-center space-x-2 px-0.5 text-[11px] font-mono text-zinc-400">
-                      <span className="text-zinc-300 font-medium">{isAi ? 'Tutor' : 'Developer'}</span>
+                    <div className="flex items-center space-x-2 px-0.5 text-[11px] font-mono text-zinc-500">
+                      <span className="text-zinc-800 font-semibold">{isAi ? 'Tutor' : 'You'}</span>
                       <span>{msg.timestamp}</span>
                     </div>
 
                     <div
                       className={`p-3.5 rounded-lg transition-colors ${
                         isAi
-                          ? 'bg-zinc-900/60 border border-zinc-800 text-zinc-200'
-                          : 'bg-zinc-800 text-white border border-zinc-700'
+                          ? 'bg-white border border-zinc-200 text-zinc-900 shadow-2xs'
+                          : 'bg-zinc-950 text-white border border-zinc-950 shadow-xs'
                       }`}
                     >
                       <FormattedMessage text={msg.text} isAi={isAi} />
 
                       {/* AI Key Points */}
                       {msg.keyPoints && msg.keyPoints.length > 0 && (
-                        <div className="mt-3.5 p-2.5 rounded bg-zinc-950 border border-zinc-800 space-y-1">
-                          <p className="text-[11px] font-mono uppercase tracking-wider text-zinc-300">
+                        <div className="mt-3.5 p-2.5 rounded bg-zinc-50 border border-zinc-200 space-y-1">
+                          <p className="text-[11px] font-mono uppercase tracking-wider text-zinc-800 font-semibold">
                             Key Invariants:
                           </p>
-                          <ul className="text-xs text-zinc-400 space-y-0.5 pl-4 list-disc marker:text-zinc-500">
+                          <ul className="text-xs text-zinc-700 space-y-0.5 pl-4 list-disc marker:text-zinc-400">
                             {msg.keyPoints.map((point, ptIdx) => (
                               <li key={ptIdx}>{point}</li>
                             ))}
@@ -570,16 +570,16 @@ export default function AiTutor() {
 
                     {/* AI Message Action Bar */}
                     {isAi && (
-                      <div className="flex items-center space-x-2 pt-0.5 px-0.5 text-[11px] font-mono text-zinc-400">
+                      <div className="flex items-center space-x-2 pt-0.5 px-0.5 text-[11px] font-mono text-zinc-500">
                         <button
                           onClick={() => handleCopy(msg.text, msg.id)}
-                          className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-zinc-900 hover:text-white transition-colors"
+                          className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-zinc-100 hover:text-zinc-950 transition-colors"
                           title="Copy text"
                         >
                           {copiedId === msg.id ? (
                             <>
-                              <Check size={11} className="text-white" />
-                              <span className="text-white">copied</span>
+                              <Check size={11} className="text-emerald-600" />
+                              <span className="text-emerald-600 font-medium">copied</span>
                             </>
                           ) : (
                             <>
@@ -591,13 +591,13 @@ export default function AiTutor() {
 
                         <button
                           onClick={() => handleSaveFlashcard(msg.id)}
-                          className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-zinc-900 hover:text-white transition-colors"
+                          className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-zinc-100 hover:text-zinc-950 transition-colors"
                           title="Save as study card"
                         >
                           {savedCardId === msg.id ? (
                             <>
-                              <Check size={11} className="text-white" />
-                              <span className="text-white">saved</span>
+                              <Check size={11} className="text-emerald-600" />
+                              <span className="text-emerald-600 font-medium">saved</span>
                             </>
                           ) : (
                             <>
@@ -616,7 +616,7 @@ export default function AiTutor() {
                           <button
                             key={fIdx}
                             onClick={() => handleSend(fu)}
-                            className="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-700 transition-colors"
+                            className="text-[11px] font-mono px-2 py-0.5 rounded bg-white hover:bg-zinc-100 text-zinc-700 hover:text-zinc-950 border border-zinc-200 transition-colors shadow-2xs"
                           >
                             → {fu}
                           </button>
@@ -626,7 +626,7 @@ export default function AiTutor() {
                   </div>
 
                   {!isAi && (
-                    <div className="w-6 h-6 rounded bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0 mt-0.5 text-zinc-200">
+                    <div className="w-6 h-6 rounded bg-zinc-950 border border-zinc-900 flex items-center justify-center shrink-0 mt-0.5 text-white shadow-2xs">
                       <User size={13} />
                     </div>
                   )}
@@ -637,12 +637,12 @@ export default function AiTutor() {
             {/* Typing Indicator */}
             {isTyping && (
               <div className="flex items-start space-x-3">
-                <div className="w-6 h-6 rounded bg-zinc-900 border border-zinc-700 flex items-center justify-center shrink-0 text-zinc-200">
+                <div className="w-6 h-6 rounded bg-zinc-100 border border-zinc-300 flex items-center justify-center shrink-0 text-zinc-800 shadow-2xs">
                   <Bot size={13} />
                 </div>
-                <div className="p-2.5 rounded bg-zinc-900/60 border border-zinc-800 flex items-center space-x-2 text-[11px] font-mono text-zinc-400">
+                <div className="p-2.5 rounded bg-white border border-zinc-200 flex items-center space-x-2 text-[11px] font-mono text-zinc-600 shadow-2xs">
                   <span>Generating response...</span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-pulse"></div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-500 animate-pulse"></div>
                 </div>
               </div>
             )}
@@ -651,7 +651,7 @@ export default function AiTutor() {
           </div>
 
           {/* Bottom Chat Input Form */}
-          <div className="p-3 bg-zinc-900/40 border-t border-zinc-800">
+          <div className="p-3 bg-zinc-50/70 border-t border-zinc-200">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -659,7 +659,7 @@ export default function AiTutor() {
               }}
               className="flex items-end gap-2"
             >
-              <div className="flex-1 bg-zinc-900 border border-zinc-800 focus-within:border-zinc-600 rounded-md transition-colors">
+              <div className="flex-1 bg-white border border-zinc-300 focus-within:border-zinc-900 rounded-md transition-colors shadow-2xs">
                 <textarea
                   ref={inputRef}
                   value={inputMessage}
@@ -668,11 +668,11 @@ export default function AiTutor() {
                   placeholder={`Ask a question or enter a topic in [${selectedSubject}]...`}
                   rows={2}
                   id="chat-input"
-                  className="w-full px-3 py-2 bg-transparent text-white placeholder-zinc-500 text-xs focus:outline-none resize-none font-mono"
+                  className="w-full px-3 py-2 bg-transparent text-zinc-950 placeholder-zinc-400 text-xs focus:outline-none resize-none font-mono"
                 />
-                <div className="flex items-center justify-between px-3 pb-1.5 text-[10px] font-mono text-zinc-400">
+                <div className="flex items-center justify-between px-3 pb-1.5 text-[10px] font-mono text-zinc-500">
                   <span>
-                    Scope: <strong className="text-zinc-300 capitalize">{selectedSubject}</strong> ({selectedMode})
+                    Scope: <strong className="text-zinc-900 capitalize">{selectedSubject}</strong> ({selectedMode})
                   </span>
                   <span className="flex items-center space-x-1">
                     <span className="dev-kbd">Shift + Enter</span>
@@ -685,10 +685,10 @@ export default function AiTutor() {
                 type="submit"
                 disabled={!inputMessage.trim() || isTyping}
                 id="send-message-btn"
-                className={`p-2.5 rounded-md flex items-center justify-center transition-colors ${
+                className={`p-2.5 rounded-md flex items-center justify-center transition-colors shadow-xs ${
                   inputMessage.trim() && !isTyping
-                    ? 'bg-white hover:bg-zinc-200 text-black'
-                    : 'bg-zinc-900 text-zinc-600 cursor-not-allowed border border-zinc-800'
+                    ? 'bg-zinc-950 hover:bg-zinc-800 text-white'
+                    : 'bg-zinc-200 text-zinc-400 cursor-not-allowed border border-zinc-200'
                 }`}
               >
                 <CornerDownLeft size={15} />

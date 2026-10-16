@@ -1,26 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --color-main-bg: #000000;
-  --color-card-bg: #0c0c0e;
-  --color-secondary-bg: #141417;
-  --color-primary: #ffffff;
-  --color-electric: #ffffff;
-  --color-cyan-accent: #e4e4e7;
-  --color-purple-accent: #d4d4d8;
-  --color-main-text: #fafafa;
-  --color-secondary-text: #a1a1aa;
-  --color-border-subtle: #27272a;
+  --color-main-bg: #f8fafc;
+  --color-card-bg: #ffffff;
+  --color-secondary-bg: #f1f5f9;
+  --color-primary: #09090b;
+  --color-electric: #09090b;
+  --color-cyan-accent: #334155;
+  --color-purple-accent: #475569;
+  --color-main-text: #09090b;
+  --color-secondary-text: #64748b;
+  --color-border-subtle: #e2e8f0;
 }
 
 @layer base {
   * {
-    border-color: #27272a;
+    border-color: #e2e8f0;
   }
 
   body {
-    background-color: #000000;
-    color: #fafafa;
+    background-color: #f8fafc;
+    color: #09090b;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -33,22 +33,23 @@
 
 @layer utilities {
   .glow-effect {
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
   }
   
   .glass-card {
-    background-color: #09090b;
-    border: 1px solid #27272a;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
   }
 
   .dev-card {
-    background-color: #09090b;
-    border: 1px solid #27272a;
-    transition: border-color 0.15s ease;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
 
   .dev-card:hover {
-    border-color: #3f3f46;
+    border-color: #cbd5e1;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
   }
 
   .dev-kbd {
@@ -59,9 +60,9 @@
     font-size: 0.6875rem;
     font-family: ui-monospace, monospace;
     font-weight: 500;
-    color: #a1a1aa;
-    background-color: #18181b;
-    border: 1px solid #27272a;
+    color: #475569;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
     border-radius: 0.25rem;
   }
 
