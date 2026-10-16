@@ -27,17 +27,27 @@ export default function Sidebar() {
   const location = useLocation();
 
   return (
-    <div className="h-screen w-64 glass-card border-r border-gray-800 flex flex-col fixed left-0 top-0">
-      <div className="p-6 flex items-center space-x-3">
-        <div className="w-8 h-8 rounded-lg bg-linear-to-br from-electric to-cyan-accent flex items-center justify-center">
-          <span className="text-white font-bold text-xl">A</span>
-        </div>
-        <span className="text-xl font-bold text-transparent bg-clip-text bg-linear-to-r from-main-text to-secondary-text">
-          StudyAI
+    <aside className="h-screen w-64 bg-black border-r border-zinc-800 flex flex-col fixed left-0 top-0 select-none">
+      {/* Brand Header */}
+      <div className="p-5 border-b border-zinc-800/80 flex items-center justify-between">
+        <Link to="/dashboard" className="flex items-center space-x-2.5 group">
+          <div className="w-7 h-7 rounded bg-white flex items-center justify-center text-black font-mono font-bold text-xs tracking-tight">
+            AI
+          </div>
+          <span className="text-sm font-semibold tracking-tight text-white group-hover:text-zinc-200 transition-colors">
+            StudyAI
+          </span>
+        </Link>
+        <span className="text-[10px] font-mono px-1.5 py-0.5 bg-zinc-900 text-zinc-400 border border-zinc-800 rounded">
+          PRO
         </span>
       </div>
 
-      <nav className="flex-1 px-4 space-y-1 overflow-y-auto mt-4">
+      {/* Navigation Links */}
+      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        <div className="px-3 pb-2 text-[11px] font-mono uppercase tracking-wider text-zinc-400">
+          Workspace
+        </div>
         {navigation.map((item) => {
           const isActive = location.pathname === item.href;
           const Icon = item.icon;
@@ -45,32 +55,39 @@ export default function Sidebar() {
             <Link
               key={item.name}
               to={item.href}
-              className={`flex items-center px-3 py-3 rounded-lg transition-all group ${
+              className={`flex items-center px-3 py-2 rounded-md text-xs font-medium transition-colors ${
                 isActive 
-                  ? 'bg-primary/20 text-electric' 
-                  : 'text-secondary-text hover:bg-secondary-bg hover:text-main-text'
+                  ? 'bg-zinc-900 text-white border border-zinc-800' 
+                  : 'text-zinc-400 hover:bg-zinc-950 hover:text-zinc-200'
               }`}
             >
               <Icon 
-                size={20} 
-                className={`mr-3 ${isActive ? 'text-electric' : 'text-secondary-text group-hover:text-main-text'} transition-colors`} 
+                size={16} 
+                className={`mr-2.5 ${isActive ? 'text-white' : 'text-zinc-400'}`} 
               />
-              <span className="font-medium">{item.name}</span>
+              <span>{item.name}</span>
             </Link>
           );
         })}
       </nav>
 
-      <div className="p-4 border-t border-gray-800 space-y-1">
-        <Link to="/settings" className="flex items-center px-3 py-3 rounded-lg text-secondary-text hover:bg-secondary-bg hover:text-main-text transition-all group">
-          <Settings size={20} className="mr-3 text-secondary-text group-hover:text-main-text transition-colors" />
-          <span className="font-medium">Settings</span>
+      {/* Bottom User / Settings Section */}
+      <div className="p-3 border-t border-zinc-800 space-y-0.5">
+        <Link 
+          to="/settings" 
+          className="flex items-center px-3 py-2 rounded-md text-xs font-medium text-zinc-400 hover:bg-zinc-950 hover:text-zinc-200 transition-colors"
+        >
+          <Settings size={16} className="mr-2.5 text-zinc-400" />
+          <span>Settings</span>
         </Link>
-        <Link to="/login" className="flex items-center px-3 py-3 rounded-lg text-secondary-text hover:bg-red-900/20 hover:text-red-400 transition-all group">
-          <LogOut size={20} className="mr-3 text-secondary-text group-hover:text-red-400 transition-colors" />
-          <span className="font-medium">Log out</span>
+        <Link 
+          to="/login" 
+          className="flex items-center px-3 py-2 rounded-md text-xs font-medium text-zinc-400 hover:bg-zinc-950 hover:text-zinc-200 transition-colors"
+        >
+          <LogOut size={16} className="mr-2.5 text-zinc-400" />
+          <span>Log out</span>
         </Link>
       </div>
-    </div>
+    </aside>
   );
 }

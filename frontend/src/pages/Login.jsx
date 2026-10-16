@@ -1,71 +1,89 @@
-import { Mail, Lock, LogIn, ArrowRight } from 'lucide-react';
+import { Mail, Lock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Login() {
   return (
-    <div className="min-h-screen bg-main-bg flex items-center justify-center p-4">
-      <div className="glass-card p-8 rounded-2xl w-full max-w-md glow-effect relative overflow-hidden">
-        {/* Background gradient decorative element */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-primary via-electric to-cyan-accent"></div>
-        
-        <div className="text-center space-y-2 mb-8">
-          <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-electric to-cyan-accent">
-            Welcome Back
+    <div className="min-h-screen bg-black flex items-center justify-center p-4 selection:bg-zinc-800 selection:text-white">
+      <div className="bg-zinc-950 border border-zinc-800 p-8 rounded-lg w-full max-w-sm">
+        {/* Brand Icon */}
+        <div className="flex justify-center mb-6">
+          <div className="w-8 h-8 rounded bg-white text-black font-mono font-bold text-xs flex items-center justify-center">
+            AI
+          </div>
+        </div>
+
+        <div className="text-center space-y-1 mb-6">
+          <h1 className="text-lg font-semibold tracking-tight text-white">
+            Sign in to StudyAI
           </h1>
-          <p className="text-secondary-text text-sm">
-            Log in to continue your AI-powered learning journey.
+          <p className="text-xs text-zinc-400 font-mono">
+            Enter your credentials to continue
           </p>
         </div>
 
-        <form className="space-y-6">
-          <div className="space-y-4">
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary-text">
-                <Mail size={18} />
+        <form className="space-y-4">
+          <div className="space-y-3">
+            <div className="space-y-1">
+              <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
+                Email
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-500">
+                  <Mail size={15} />
+                </div>
+                <input
+                  type="email"
+                  placeholder="name@example.com"
+                  className="w-full pl-9 pr-3 py-2 bg-zinc-900 border border-zinc-800 rounded text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-500 font-mono transition-colors"
+                />
               </div>
-              <input
-                type="email"
-                placeholder="Email address"
-                className="w-full pl-10 pr-4 py-3 bg-secondary-bg/50 border border-gray-700 rounded-lg focus:outline-none focus:border-electric focus:ring-1 focus:ring-electric transition-colors text-main-text placeholder-secondary-text"
-              />
             </div>
-            
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary-text">
-                <Lock size={18} />
+
+            <div className="space-y-1">
+              <div className="flex items-center justify-between">
+                <label className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
+                  Password
+                </label>
+                <a href="#" className="text-[11px] font-mono text-zinc-400 hover:text-white transition-colors">
+                  Forgot?
+                </a>
               </div>
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full pl-10 pr-4 py-3 bg-secondary-bg/50 border border-gray-700 rounded-lg focus:outline-none focus:border-electric focus:ring-1 focus:ring-electric transition-colors text-main-text placeholder-secondary-text"
-              />
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-500">
+                  <Lock size={15} />
+                </div>
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  className="w-full pl-9 pr-3 py-2 bg-zinc-900 border border-zinc-800 rounded text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-500 font-mono transition-colors"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center space-x-2 cursor-pointer text-secondary-text hover:text-main-text transition-colors">
-              <input type="checkbox" className="rounded border-gray-700 bg-secondary-bg text-electric focus:ring-electric" />
-              <span>Remember me</span>
+          <div className="flex items-center text-xs">
+            <label className="flex items-center space-x-2 cursor-pointer text-zinc-400 hover:text-zinc-200 transition-colors">
+              <input
+                type="checkbox"
+                className="rounded border-zinc-800 bg-zinc-900 text-white focus:ring-0"
+              />
+              <span className="text-[11px] font-mono">Remember this device</span>
             </label>
-            <a href="#" className="text-electric hover:text-cyan-accent transition-colors">
-              Forgot password?
-            </a>
           </div>
 
           <Link
             to="/dashboard"
-            className="w-full bg-linear-to-r from-primary to-electric hover:from-electric hover:to-cyan-accent text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+            className="w-full bg-white hover:bg-zinc-200 text-black font-medium py-2 px-3 rounded text-xs flex items-center justify-center space-x-1.5 transition-colors"
           >
-            <LogIn size={18} />
-            <span>Sign In</span>
+            <span>Continue</span>
+            <ArrowRight size={13} />
           </Link>
         </form>
 
-        <div className="mt-8 text-center text-sm text-secondary-text">
-          Don't have an account?{' '}
-          <Link to="/register" className="text-electric hover:text-cyan-accent transition-colors inline-flex items-center group">
-            Create one 
-            <ArrowRight size={14} className="ml-1 transform group-hover:translate-x-1 transition-transform" />
+        <div className="mt-6 text-center text-xs text-zinc-400 font-mono border-t border-zinc-800/80 pt-4">
+          No account yet?{' '}
+          <Link to="/register" className="text-white hover:underline transition-all">
+            Create account
           </Link>
         </div>
       </div>

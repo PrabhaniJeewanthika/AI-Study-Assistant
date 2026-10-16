@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import DashboardLayout from './layouts/DashboardLayout'
 import Dashboard from './pages/Dashboard'
+import AiTutor from './pages/AiTutor'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<Dashboard />} />
+        <Route path="chat" element={<AiTutor />} />
       </Route>
     </Routes>
   )
